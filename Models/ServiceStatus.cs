@@ -2,8 +2,8 @@ namespace MelodeonApi.Models
 {
     public class ServiceStatus
     {
-        public short ServiceStatusCode { get; set; }
-        public string DebugMessage { get; set; }
+        public short Code { get; set; }
+        public string Message { get; set; }
 
         //todo implement constructor to load above properties from config
     }

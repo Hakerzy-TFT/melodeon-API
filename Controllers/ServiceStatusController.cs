@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 
 namespace MelodeonApi.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ServiceStatusController : ControllerBase
     {
         private readonly ILogger<ServiceStatusController> _logger;
@@ -17,13 +19,14 @@ namespace MelodeonApi.Controllers
             _logger.Log(LogLevel.Debug, "created ServiceStatusLoggController");
         }
 
+        [HttpGet]
         public IEnumerable<ServiceStatus> Get()
         {
             _logger.Log(LogLevel.Debug, "activating ServiceStatusController");
-            return Enumerable.Range(1, 1).Select(index => new ServiceStatus
+            return Enumerable.Range(1,1).Select(index => new ServiceStatus
                 {
-                    DebugMessage = "Service in debug mode",
-                    ServiceStatusCode = 200
+                    Message = "Service in debug mode",
+                    Code = 200
                 })
                 .ToArray();
         }
