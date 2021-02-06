@@ -19,6 +19,7 @@ namespace MelodeonApi.Controllers
 
         public IEnumerable<ServiceStatus> Get()
         {
+            _logger.Log(LogLevel.Debug, "activating ServiceStatusController");
             return Enumerable.Range(1, 1).Select(index => new ServiceStatus
                 {
                     DebugMessage = "Service in debug mode",
