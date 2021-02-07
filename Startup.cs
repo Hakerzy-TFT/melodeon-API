@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MelodeonApi.BusinessLogic;
+using MelodeonApi.Models;
+using MelodeonApi.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDB.Driver;
 
 namespace MelodeonApi
 {
@@ -31,6 +35,13 @@ namespace MelodeonApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MelodeonApi", Version = "v1"});
             });
+            services.Configure<MongoSettings>(options =>
+            {
+                options.Connection = Configuration.GetSection("MongoSettings:Connection").Value;
+                options.DatabaseName = Configuration.GetSection("MongoSettings:DatabaseName").Value;
+            });
+            
+            services.AddScoped<IMongoTokenDbContext, MongoTokenDBContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
