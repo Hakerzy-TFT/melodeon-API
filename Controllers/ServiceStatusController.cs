@@ -27,12 +27,12 @@ namespace MelodeonApi.Controllers
         }
 
         [HttpGet]
-        [Route("GetAll")]
+        [Route("Get")]
         public async Task<ActionResult<IEnumerable<ServiceStatus>>> Get()
         {
             _logger.Log(LogLevel.Debug, "running service status get request");
             var all = await _dbCollection.FindAsync(Builders<ServiceStatus>.Filter.Empty);
-            return Ok(all.ToList());
+            return Ok(all.ToList().ToArray()[0]);
         }
     }
 }

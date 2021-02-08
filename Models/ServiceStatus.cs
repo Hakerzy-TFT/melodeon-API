@@ -9,8 +9,8 @@ namespace MelodeonApi.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { set; get; }
-        public bool webApp { set; get; }
-        public bool api { set; get; }
-        public bool db { set; get; }
+        public bool WebService { set; get; }
+        public bool Api { set; get; }
+        public bool Database { set; get; }
     }
 }
