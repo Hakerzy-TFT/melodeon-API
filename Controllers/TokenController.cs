@@ -13,10 +13,10 @@ namespace MelodeonApi.Controllers
     public class TokenController : ControllerBase
     {
         private readonly ILogger<TokenController> _logger;
-        private readonly IMongoTokenDbContext _context;
+        private readonly IMongoCollectionDbContext _context;
         private IMongoCollection<Token> _dbCollection;
 
-        public TokenController(ILogger<TokenController> logger, IMongoTokenDbContext context)
+        public TokenController(ILogger<TokenController> logger, IMongoCollectionDbContext context)
         {
             _context = context;
             _dbCollection = _context.GetCollection<Token>(typeof(Token).Name);

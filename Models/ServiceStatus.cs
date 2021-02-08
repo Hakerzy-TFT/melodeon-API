@@ -1,10 +1,16 @@
+using System;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+
 namespace MelodeonApi.Models
 {
     public class ServiceStatus
     {
-        public short Code { get; set; }
-        public string Message { get; set; }
-
-        //todo implement constructor to load above properties from config
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { set; get; }
+        public bool WebService { set; get; }
+        public bool Api { set; get; }
+        public bool Database { set; get; }
     }
 }

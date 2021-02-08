@@ -1,4 +1,6 @@
-
+using System;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 using System;
 using MongoDB.Bson;
@@ -10,6 +12,7 @@ namespace MelodeonApi.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        public string _id { set; get; }
         public string Name { set; get; }
         public string AuthString { set; get; }
         public string Created { set; get; }
