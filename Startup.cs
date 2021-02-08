@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MelodeonApi.BusinessLogic;
+using MelodeonApi.Controllers;
 using MelodeonApi.Models;
 using MelodeonApi.Models.Interfaces;
 using Microsoft.AspNetCore.Builder;
@@ -41,7 +42,8 @@ namespace MelodeonApi
                 options.DatabaseName = Configuration.GetSection("MongoSettings:DatabaseName").Value;
             });
             
-            services.AddScoped<IMongoTokenDbContext, MongoTokenDBContext>();
+            services.AddScoped<IMongoCollectionDbContext, TokenDbContext>();
+            services.AddScoped<IMongoCollectionServiceStatusDbContext, ServiceStatusDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
