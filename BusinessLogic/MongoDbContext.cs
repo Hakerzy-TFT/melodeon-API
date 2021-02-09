@@ -5,13 +5,13 @@ using MongoDB.Driver;
 
 namespace MelodeonApi.BusinessLogic
 {
-    public class TokenDbContext : IMongoCollectionDbContext
+    public class MongoDbContext : IMongoCollectionDbContext
     {
         private IMongoDatabase _db { get; set; }
         private MongoClient _mongoClient { get; set; }
         public IClientSessionHandle Session { get; set; }
 
-        public TokenDbContext(IOptions<MongoSettings> configuration)
+        public MongoDbContext(IOptions<MongoSettings> configuration)
         {
             _mongoClient = new MongoClient(configuration.Value.Connection);
             _db = _mongoClient.GetDatabase(configuration.Value.DatabaseName);
