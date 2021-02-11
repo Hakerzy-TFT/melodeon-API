@@ -43,8 +43,8 @@ namespace MelodeonApi
                 options.DatabaseName = Configuration.GetSection("MongoSettings:DatabaseName").Value;
             });
             
-            services.AddScoped<IMongoCollectionDbContext, TokenDbContext>();
-            services.AddScoped<IMongoCollectionServiceStatusDbContext, ServiceStatusDbContext>();
+            // services.AddScoped<IMongoCollectionDbContext, TokenDbContext>();
+            services.AddScoped<IMongoCollectionDbContext, MongoDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
