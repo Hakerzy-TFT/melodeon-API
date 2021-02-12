@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using MelodeonApi.Models;
 using MelodeonApi.Models.Dtos;
@@ -18,6 +19,7 @@ namespace MelodeonApi.Controllers
         private readonly ILogger<TokenController> _logger;
         private readonly IMongoCollectionDbContext _context;
         private IMongoCollection<Token> _dbCollection;
+        //private IMongoCollection<TokenConfiguration> _tokenDbCollection;
 
         public TokenController(ILogger<TokenController> logger, IMongoCollectionDbContext context)
         {
@@ -37,11 +39,31 @@ namespace MelodeonApi.Controllers
 
         [HttpPut]
         [Route("Create")]
-        public async Task<ActionResult> Create(string request)
+        public async Task<ActionResult<Token>> Create(string request)
         {
-            var req = JsonConvert.DeserializeObject<TokenDto>(request);
-            Console.WriteLine("request:" + req.ToString());
-            return Ok(";) -> " + request);
+            try
+            {
+                var req = JsonConvert.DeserializeObject<TokenDto>(request);
+                var configCollection = await _dbCollection.FindAsync(Builders<Token>.Filter.Empty);
+                var config = await CreateTokenConfig();
+                Console.WriteLine("request:" + req.ToString());
+                return Ok(";) -> " + request);
+            }
+            catch (Exception e)
+            {
+                return BadRequest("Couldn't process request: " + e);
+            }
+        }
+
+        private async Task<Configuration> CreateTokenConfig()
+        {
+            var tokenDbCollection = _context.GetCollection<Configuration>(nameof(Configuration));
+            var all = await tokenDbCollection.FindAsync(Builders<Configuration>.Filter.Empty);
+            var val = all.ToList().ToArray();
+            Console.WriteLine("All configs: " + val.ToArray()[0].lastLogin);
+            // Console.WriteLine("Hello: " + maxIndex );
+
+            return new Configuration();
         }
     }
 }
