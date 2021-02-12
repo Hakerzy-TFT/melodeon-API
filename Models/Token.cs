@@ -13,8 +13,9 @@ namespace MelodeonApi.Models
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
         public string _id { set; get; }
-        public string Name { set; get; }
-        public string AuthString { set; get; }
-        public string Created { set; get; }
+        public string tokenAuth { set; get; }
+        public string spotifyAuth { set; get; }
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string configuration { set; get; }
     }
 }

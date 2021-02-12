@@ -1,4 +1,4 @@
-namespace MelodeonApi.Models.dtos
+namespace MelodeonApi.Models.Dtos
 {
     public class ServiceStatusDto
     {

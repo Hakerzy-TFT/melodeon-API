@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MelodeonApi.Models;
-using MelodeonApi.Models.dtos;
+using MelodeonApi.Models.Dtos;
 using MelodeonApi.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

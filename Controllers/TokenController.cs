@@ -1,10 +1,13 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MelodeonApi.Models;
+using MelodeonApi.Models.Dtos;
 using MelodeonApi.Models.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
+using Newtonsoft.Json;
 
 namespace MelodeonApi.Controllers
 {
@@ -30,6 +33,15 @@ namespace MelodeonApi.Controllers
         {
             var all = await _dbCollection.FindAsync(Builders<Token>.Filter.Empty);
             return Ok(all.ToList());
+        }
+
+        [HttpPut]
+        [Route("Create")]
+        public async Task<ActionResult> Create(string request)
+        {
+            var req = JsonConvert.DeserializeObject<TokenDto>(request);
+            Console.WriteLine("request:" + req.ToString());
+            return Ok(";) -> " + request);
         }
     }
 }
